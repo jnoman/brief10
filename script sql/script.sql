@@ -38,7 +38,9 @@ create table Commande
    dateCommande         datetime not null,
    PrixUT               float not null check(PrixUT>0),
    etat_commande        varchar(254),
-   is_standard			TINYINT(1) not null,
+   is_standard			   TINYINT(1) not null,
+   telephone            varchar(254),
+   adresse              varchar(254),
    primary key (idCommande)
 );
 

@@ -9,7 +9,7 @@
     die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT commande.idCommande,users.nom,users.prenom,commande.dateCommande,commande.PrixUT FROM commande,users WHERE commande.etat_commande='en attente' AND commande.is_standard=0 AND commande.idUser=users.idUser ORDER BY commande.dateCommande ASC";
+    $sql = "SELECT commande.idCommande,users.nom,users.prenom,commande.dateCommande,commande.telephone,commande.adresse,commande.prixUT FROM commande,users WHERE commande.etat_commande='en attente' AND commande.is_standard=0 AND commande.idUser=users.idUser ORDER BY commande.dateCommande ASC";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -22,6 +22,8 @@
                 <th scope="col">prenom client</th>
                 <th scope="col">date commande</th>
                 <th scope="col">prix</th>
+                <th scope="col">telephone</th>
+                <th scope="col">adresse</th>
                 <th scope="col">terminé</th>
                 <th scope="col">refusé</th>
             </tr>
@@ -34,7 +36,9 @@
                     <td>'. $row["nom"].'</td>
                     <td>'. $row["prenom"].'</td>
                     <td>'. $row["dateCommande"].'</td>
-                    <td>'. $row["PrixUT"].'</td>
+                    <td>'. $row["prixUT"].'</td>
+                    <td>'. $row["telephone"].'</td>
+                    <td>'. $row["adresse"].'</td>
                     <td><button type="submit" class="btn btn-info btn-lg" name="termine['. $row["idCommande"].']">terminé</button></td>
                     <td><button type="submit" class="btn btn-info btn-lg" name="refuse['. $row["idCommande"].']">refusé</button></td>
                     </form>
@@ -74,7 +78,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
         $id=array_keys($_POST["refuse"])[0];
-        $sql = "UPDATE commande SET etat_commande='refus' WHERE idCommande=$id";
+        $sql = "UPDATE commande SET etat_commande='refuse' WHERE idCommande=$id";
         if (!$conn->query($sql) === TRUE) {
             echo "<script>alert(\"erreur\")</script>";
         }

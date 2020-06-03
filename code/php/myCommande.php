@@ -9,7 +9,7 @@
     die("Connection failed: " . $conn->connect_error);
     }
     $id=$_SESSION['Client'];
-    $sql = "SELECT commande.idCommande,commande.dateCommande,commande.prixUT,commande.etat_commande FROM commande WHERE commande.idUser=$id ORDER BY commande.dateCommande ASC";
+    $sql = "SELECT commande.idCommande,commande.dateCommande,commande.PrixUT,commande.etat_commande FROM commande WHERE commande.idUser=$id ORDER BY commande.dateCommande ASC";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -29,7 +29,7 @@
                     <form method="POST" action="">
                     <th scope="row" name="idproduit">'. $row["idCommande"].'</th>
                     <td>'. $row["dateCommande"].'</td>
-                    <td>'. $row["prixUT"].'</td>
+                    <td>'. $row["PrixUT"].'</td>
                     <td>'. $row["etat_commande"].'</td>
                     </form>
                 </tr>';
